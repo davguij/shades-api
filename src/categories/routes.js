@@ -1,7 +1,9 @@
 'use strict';
+const { Entry, Category } = require('./models');
 
 async function categories(fastify, options) {
   fastify.get('/c', async (request, reply) => {
+    console.log(await Category.find({}));
     return { hello: 'get all categories' };
   });
 

@@ -1,12 +1,17 @@
 'use strict';
+require('dotenv-safe').config();
 require('make-promises-safe'); // installs an 'unhandledRejection' handler
+
+const mongoose = require('mongoose');
+mongoose.connect(process.env.MONGODB_URI);
+
 const fastify = require('fastify')();
 
 fastify.get('/', async (request, reply) => {
   return { hello: 'bye' };
 });
 
-fastify.register(require('./categories/'));
+fastify.register(require('./categories/routes'));
 
 const start = async () => {
   try {
